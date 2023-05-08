@@ -1,10 +1,7 @@
 <?php
 
-namespace Spaal\RH\Domain\Infrastructure\Repository;
+namespace Spaal\RH\Infrastructure\Repository;
 
-
-
-use PDO;
 use Spaal\RH\Domain\Model\Employee;
 
 class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeRepository
@@ -16,17 +13,28 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
     public function allEmployees(): array
     {
         $sqlQuery = 'SELECT * FROM Employees;';
-        $statement = $this->connection->query($sqlQuery);
+        $statement = $this->connection->prepare($sqlQuery);
 
         return $this->hydrateEmployeesList($statement);
     }
+
+    public function employeesForRegister(Employee $employee): ?Employee
+    {
+        $sqlQuery = 'SELECT * FROM Employees WHERE Registro = ?;';
+        $statement = $this->connection->prepare($sqlQuery);
+        $statement->bindValue(1, $employee->getRegistro());
+
+        return $statement->execute();
+    }
+
     public function employeesBirthAt(\DateTimeInterface $birthDate): array
     {
-        // TODO: Implement employeesBirthAt() method.
+        return "teste";
     }
-    public function save(Employee $student): bool
+
+    public function save(Employee $employee): bool
     {
-        // TODO: Implement save() method.
+        return $this->insertEmployee($employee);
     }
 
     private function hydrateEmployeesList(\PDOStatement $statement): array
@@ -44,6 +52,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
                 $employeeData['Departamento'],
                 $employeeData['Cep'],
                 $employeeData['Rua'],
+                $employeeData['NumeroCasa'],
                 $employeeData['Bairro'],
                 $employeeData['Cidade']
             );
@@ -62,8 +71,10 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
                                                Departamento,
                                                Cep,
                                                Rua,
-                                               Cidade,
-                                               Bairro)
+                                               NumeroCasa,
+                                               Bairro,
+                                               Cidade
+                                               )
                                                 VALUES 
                                              ( :Registro,
                                                :Nome,
@@ -73,22 +84,25 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
                                                :Departamento,
                                                :Cep,
                                                :Rua,
-                                               :Cidade,
-                                               :Bairro);
+                                               :Bairro,
+                                               :NumeroCasa,
+                                               :Cidade
+                                               );
                         ';
-                                $statement = $this->connection->prepare($insertQuery);
+        $statement = $this->connection->prepare($insertQuery);
 
         $success = $statement->execute([
-           ':Registro' => $employee->getRegistro(),
-           ':Nome' => $employee->getNome(),
-           ':Data_Admissao' => $employee->getDataAdmissao(),
-           ':Data_Deissao' => $employee->getDataDemissao(),
-           ':Data_Nascimento' => $employee->getDataNascimento(),
-           ':Departamento' => $employee->getDepartamento(),
-           ':Cep' => $employee->getCep(),
-           ':Rua' => $employee->getRua(),
-           ':Cidade' => $employee->getCidade(),
-           ':Bairro' => $employee->getBairro(),
+            ':Registro' => $employee->getRegistro(),
+            ':Nome' => $employee->getNome(),
+            ':Data_Admissao' => $employee->getDataAdmissao(),
+            ':Data_Deissao' => $employee->getDataDemissao(),
+            ':Data_Nascimento' => $employee->getDataNascimento(),
+            ':Departamento' => $employee->getDepartamento(),
+            ':Cep' => $employee->getCep(),
+            ':Rua' => $employee->getRua(),
+            ':Numero' => $employee->getNumeroCasa(),
+            ':Bairro' => $employee->getBairro(),
+            ':Cidade' => $employee->getCidade(),
         ]);
 
         return $success;
@@ -104,9 +118,10 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
                                                Departamento = :Departamento,
                                                Cep = :Cep,
                                                Rua = :Rua,
-                                               Cidade = :Cidade,
-                                               Bairro = :Bairro
-                                                WHERE Registro = :Registro';);
+                                               NumeroCasa = :NumeroCasa,
+                                               Bairro = :Bairro,
+                                               Cidade = :Cidade
+                                               WHERE Registro = :Registro';;
         $statement = $this->connection->prepare($updateQuery);
         $success = $statement->execute([
             ':Registro' => $employee->getRegistro(),
@@ -117,6 +132,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
             ':Departamento' => $employee->getDepartamento(),
             ':Cep' => $employee->getCep(),
             ':Rua' => $employee->getRua(),
+            ':NumeroCasa' => $employee->getNumeroCasa(),
             ':Cidade' => $employee->getCidade(),
             ':Bairro' => $employee->getBairro(),
         ]);
@@ -124,12 +140,11 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
         return $success;
     }
 
-    public function removeEmployee(Employee $employee): bool
+    public function remove(Employee $employee): bool
     {
         $statement = $this->connection->prepare('DElETE FROM Employees WHERE Registro = ?;');
         $statement->bindValue(1, $employee->getRegistro());
 
         return $statement->execute();
     }
-
 }

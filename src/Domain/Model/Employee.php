@@ -12,6 +12,7 @@ class Employee
                                 private string $departamento,
                                 private string $cep,
                                 private string $rua,
+                                private string $numeroCasa,
                                 private string $bairro,
                                 private string $cidade)
     {
@@ -175,6 +176,11 @@ class Employee
     public function setCidade(string $cidade): void
     {
         $this->cidade = $cidade;
+    }
+
+    public function getNumeroCasa(): string
+    {
+        return $this->numeroCasa;
     }
 
 
