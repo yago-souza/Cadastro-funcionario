@@ -1,6 +1,6 @@
 <?php
 
-namespace Spaal\RH\Domain\Infrastructure\Persistence;
+namespace Spaal\RH\Infrastructure\Persistence;
 
 use PDO;
 

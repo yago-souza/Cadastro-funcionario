@@ -2,6 +2,7 @@
 
 namespace Spaal\RH\Infrastructure\Repository;
 
+use PDO;
 use Spaal\RH\Domain\Model\Employee;
 
 class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeRepository
@@ -84,8 +85,8 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
                                                :Departamento,
                                                :Cep,
                                                :Rua,
-                                               :Bairro,
                                                :NumeroCasa,
+                                               :Bairro,
                                                :Cidade
                                                );
                         ';
@@ -94,13 +95,13 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
         $success = $statement->execute([
             ':Registro' => $employee->getRegistro(),
             ':Nome' => $employee->getNome(),
-            ':Data_Admissao' => $employee->getDataAdmissao(),
-            ':Data_Deissao' => $employee->getDataDemissao(),
-            ':Data_Nascimento' => $employee->getDataNascimento(),
+            ':Data_Admissao' => $employee->getDataAdmissao()->format('d/m/Y'),
+            ':Data_Deissao' => $employee->getDataDemissao()->format('d/m/Y'),
+            ':Data_Nascimento' => $employee->getDataNascimento()->format('d/m/Y'),
             ':Departamento' => $employee->getDepartamento(),
             ':Cep' => $employee->getCep(),
             ':Rua' => $employee->getRua(),
-            ':Numero' => $employee->getNumeroCasa(),
+            ':NumeroCasa' => $employee->getNumeroCasa(),
             ':Bairro' => $employee->getBairro(),
             ':Cidade' => $employee->getCidade(),
         ]);

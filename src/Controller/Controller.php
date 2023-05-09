@@ -1,6 +1,6 @@
 <?php
 
-namespace Spaal\RH\Domain\Controller;
+namespace Spaal\RH\Controller;
 
 interface Controller
 {

@@ -45,7 +45,7 @@
     </label>
     <label>
         CEP:
-        <input type="text" name="CEP" required>
+        <input type="text" name="Cep" required>
     </label>
     <label>
         Rua:
@@ -53,7 +53,7 @@
     </label>
     <label>
         Numero:
-        <input type="text" name="numero" required>
+        <input type="text" name="Numero" required>
     </label>
     <label>
         Bairro:

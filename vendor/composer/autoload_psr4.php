@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Yago\\Aluraplay\\' => array($baseDir . '/src'),
+    'Spaal\\RH\\' => array($baseDir . '/src'),
 );

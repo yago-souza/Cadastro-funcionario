@@ -1,12 +1,11 @@
 <?php
 
-use Spaal\RH\Domain\Infrastructure\Persistence\ConnectionCreator;
-use Spaal\RH\Domain\Controller\NewEmployeeController;
+use Spaal\RH\Infrastructure\Persistence\ConnectionCreator;
+use Spaal\RH\Controller\NewEmployeeController;
 use Spaal\RH\Infrastructure\Repository\EmployeeRepository;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-$databasePath =__DIR__ . '/../../../banco';
-$pdo = new \PDO('sqlite:' . $databasePath);#ConnectionCreator::createConnection();
+$pdo = ConnectionCreator::createConnection();
 $employeeRepository = new EmployeeRepository($pdo);
 
 $pathInfo = $_SERVER['PATH_INFO'] ?? '/';
@@ -21,7 +20,6 @@ if ($pathInfo == '/' && $httpMethod == 'GET') {
     #header('Location: /');
     #var_dump($httpMethod);
     #var_dump($_POST);
-
 } else {
     $controller = new Error404Controller();
 }
