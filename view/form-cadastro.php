@@ -11,7 +11,7 @@
 <header>
     <h1>Cadastro de Empregado</h1>
     <img class="logo" src="/img/LOGO%20SPAAL%202%20JPG.jpg" alt="Logo da Empresa">
-    <a href="https://wipsites.com.br">
+    <a href="/aniversariantes">
         <button class="lista">
             Aniversariantes
         </button>

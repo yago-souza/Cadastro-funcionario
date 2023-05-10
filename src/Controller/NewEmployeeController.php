@@ -22,16 +22,16 @@ class NewEmployeeController implements Controller
         #var_dump($data->format('d/m/Y'));
         $employee = new Employee(
             filter_input(INPUT_POST, 'registro'),
-            filter_input(INPUT_POST, 'nome'),
+            mb_convert_case(filter_input(INPUT_POST, 'nome'), MB_CASE_TITLE, 'UTF-8'),
             new \DateTime(filter_input(INPUT_POST, 'data-admissao')),
             new \DateTime(filter_input(INPUT_POST, 'data-demissao')),
             new \DateTime(filter_input(INPUT_POST, 'data-nascimento')),
-            filter_input(INPUT_POST, 'departamento'),
+            mb_convert_case(filter_input(INPUT_POST, 'departamento'), MB_CASE_TITLE, 'UTF-8'),
             filter_input(INPUT_POST, 'Cep'),
-            filter_input(INPUT_POST, 'Rua'),
-            filter_input(INPUT_POST, 'Numero'),
-            filter_input(INPUT_POST, 'Bairro'),
-            filter_input(INPUT_POST, 'Cidade')
+            mb_convert_case(filter_input(INPUT_POST, 'Rua'), MB_CASE_TITLE, 'UTF-8'),
+            mb_convert_case(filter_input(INPUT_POST, 'Numero'), MB_CASE_TITLE, 'UTF-8'),
+            mb_convert_case(filter_input(INPUT_POST, 'Bairro'), MB_CASE_TITLE, 'UTF-8'),
+            mb_convert_case(filter_input(INPUT_POST, 'Cidade'), MB_CASE_TITLE, 'UTF-8')
         );
         if ($this->employeeRepository->save($employee) === false) {
             header("Location: /?sucesso=0");

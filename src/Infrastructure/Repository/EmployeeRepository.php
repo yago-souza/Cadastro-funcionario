@@ -14,7 +14,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
     public function allEmployees(): array
     {
         $sqlQuery = 'SELECT * FROM Employees;';
-        $statement = $this->connection->prepare($sqlQuery);
+        $statement = $this->connection->query($sqlQuery);
 
         return $this->hydrateEmployeesList($statement);
     }
@@ -44,12 +44,22 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
         $employeeList = [];
 
         foreach ($employeeDataList as $employeeData) {
+            #var_dump($employeeData);
+            $dataDemissao = null;
+            if ($employeeData['Data_Demissao'] !== null) {
+                $dataDemissao = \DateTime::createFromFormat('d/m/Y', $employeeData['Data_Demissao']);
+            }
+            $dataAdmissao = \DateTime::createFromFormat('d/m/Y', $employeeData['Data_Admissao']);
+            $dataNascimento = \DateTime::createFromFormat('d/m/Y', $employeeData['Data_Nascimento']);
+
+            #var_dump(new \DateTime());
+
             $employeeList[] = new Employee(
                 $employeeData['Registro'],
                 $employeeData['Nome'],
-                $employeeData['Data_Admissao'],
-                $employeeData['Data_Deissao'],
-                $employeeData['Data_Nascimento'],
+                $dataAdmissao,
+                $dataDemissao,
+                $dataNascimento,
                 $employeeData['Departamento'],
                 $employeeData['Cep'],
                 $employeeData['Rua'],
@@ -67,7 +77,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
         $insertQuery = 'INSERT INTO Employees (Registro,
                                                Nome,
                                                Data_Admissao,
-                                               Data_Deissao,
+                                               Data_Demissao,
                                                Data_Nascimento,
                                                Departamento,
                                                Cep,
@@ -80,7 +90,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
                                              ( :Registro,
                                                :Nome,
                                                :Data_Admissao,
-                                               :Data_Deissao,
+                                               :Data_Demissao,
                                                :Data_Nascimento,
                                                :Departamento,
                                                :Cep,
@@ -96,7 +106,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
             ':Registro' => $employee->getRegistro(),
             ':Nome' => $employee->getNome(),
             ':Data_Admissao' => $employee->getDataAdmissao()->format('d/m/Y'),
-            ':Data_Deissao' => $employee->getDataDemissao()->format('d/m/Y'),
+            ':Data_Demissao' => $employee->getDataDemissao()->format('d/m/Y'),
             ':Data_Nascimento' => $employee->getDataNascimento()->format('d/m/Y'),
             ':Departamento' => $employee->getDepartamento(),
             ':Cep' => $employee->getCep(),
@@ -114,7 +124,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
         $updateQuery = 'UPDATE Employees SET Registro = :Registro,
                                                Nome = :Nome,
                                                Data_Admissao = :Data_Admissao,
-                                               Data_Deissao = :Data_Deissao,
+                                               Data_Demissao = :Data_Demissao,
                                                Data_Nascimento = :Data_Nascimento,
                                                Departamento = :Departamento,
                                                Cep = :Cep,
@@ -128,7 +138,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
             ':Registro' => $employee->getRegistro(),
             ':Nome' => $employee->getNome(),
             ':Data_Admissao' => $employee->getDataAdmissao(),
-            ':Data_Deissao' => $employee->getDataDemissao(),
+            ':Data_Demissao' => $employee->getDataDemissao(),
             ':Data_Nascimento' => $employee->getDataNascimento(),
             ':Departamento' => $employee->getDepartamento(),
             ':Cep' => $employee->getCep(),

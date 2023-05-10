@@ -6,11 +6,11 @@ use Spaal\RH\Infrastructure\Persistence\ConnectionCreator;
 
 require_once 'vendor/autoload.php';
 $pdo = ConnectionCreator::createConnection();
-/*
 $repository = new \Spaal\RH\Infrastructure\Repository\EmployeeRepository($pdo);
 
-exit();
+var_dump($repository->allEmployees());
 
+/*
 $empregado = new Employee('123',
     'Yago',
     '09/05/2023',

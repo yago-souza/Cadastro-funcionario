@@ -20,6 +20,8 @@ if ($pathInfo == '/' && $httpMethod == 'GET') {
     #header('Location: /');
     #var_dump($httpMethod);
     #var_dump($_POST);
+} elseif ($pathInfo == '/aniversariantes') {
+    require_once __DIR__ . '/../view/Aniversariantes.php';
 } else {
     $controller = new Error404Controller();
 }
