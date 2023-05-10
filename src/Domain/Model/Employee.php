@@ -6,9 +6,10 @@ class Employee
 {
     public function __construct(private string $registro,
                                 private string $nome,
-                                private \DateTimeInterface $dataAdmissao,
-                                private \DateTimeInterface $dataDemissao,
-                                private \DateTimeInterface $dataNascimento,
+                                private ?string $cpf,
+                                private ?\DateTime $dataAdmissao,
+                                private ?\DateTime $dataDemissao,
+                                private ?\DateTime $dataNascimento,
                                 private string $departamento,
                                 private string $cep,
                                 private string $rua,
@@ -51,49 +52,49 @@ class Employee
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTime
      */
-    public function getDataAdmissao(): \DateTimeInterface
+    public function getDataAdmissao(): ?\DateTime
     {
         return $this->dataAdmissao;
     }
 
     /**
-     * @param \DateTimeInterface $dataAdmissao
+     * @param \DateTime $dataAdmissao
      */
-    public function setDataAdmissao(\DateTimeInterface $dataAdmissao): void
+    public function setDataAdmissao(\DateTime $dataAdmissao): void
     {
         $this->dataAdmissao = $dataAdmissao;
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTime
      */
-    public function getDataDemissao(): \DateTimeInterface
+    public function getDataDemissao(): ?\DateTime
     {
         return $this->dataDemissao;
     }
 
     /**
-     * @param \DateTimeInterface $dataDemissao
+     * @param \DateTime $dataDemissao
      */
-    public function setDataDemissao(\DateTimeInterface $dataDemissao): void
+    public function setDataDemissao(\DateTime $dataDemissao): void
     {
         $this->dataDemissao = $dataDemissao;
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTime
      */
-    public function getDataNascimento(): \DateTimeInterface
+    public function getDataNascimento(): ?\DateTime
     {
         return $this->dataNascimento;
     }
 
     /**
-     * @param \DateTimeInterface $dataNascimento
+     * @param \DateTime $dataNascimento
      */
-    public function setDataNascimento(\DateTimeInterface $dataNascimento): void
+    public function setDataNascimento(\DateTime $dataNascimento): void
     {
         $this->dataNascimento = $dataNascimento;
     }
@@ -181,6 +182,11 @@ class Employee
     public function getNumeroCasa(): string
     {
         return $this->numeroCasa;
+    }
+
+    public function getCpf(): string
+    {
+        return $this->cpf;
     }
 
 
