@@ -30,7 +30,12 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
 
     public function employeesBirthAt(\DateTimeInterface $birthDate): array
     {
-        return "teste";
+        $sqlQuery = 'SELECT * FROM employees WHERE Data_nascimento = ?;';
+        $stmt = $this->connection->prepare($sqlQuery);
+        $stmt->bindValue(1, $birthDate->format('Y-m-d'));
+        $stmt->execute();
+
+        return $this->hydrateStudentList($stmt);
     }
 
     public function save(Employee $employee): bool
