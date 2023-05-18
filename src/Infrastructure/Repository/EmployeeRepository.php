@@ -32,6 +32,7 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
 
     public function employeesBirthAt(int $birthDate): array
     {
+<<<<<<< HEAD
         #$sqlQuery = 'SELECT * FROM employees WHERE Data_nascimento = ?;';
         $sqlQuery = 'SELECT *
                             FROM SPL_VW_EMPLOYEES
@@ -42,6 +43,14 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
         $stmt->execute();
 
          return $this->hydrateEmployeesList($stmt);
+=======
+        $sqlQuery = 'SELECT * FROM employees WHERE Data_nascimento = ?;';
+        $stmt = $this->connection->prepare($sqlQuery);
+        $stmt->bindValue(1, $birthDate->format('Y-m-d'));
+        $stmt->execute();
+
+        return $this->hydrateStudentList($stmt);
+>>>>>>> 407b0560f2eb1addaaf84f7736ecda8787cef404
     }
 
     public function save(Employee $employee): bool
