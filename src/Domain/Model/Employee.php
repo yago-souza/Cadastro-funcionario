@@ -6,9 +6,10 @@ class Employee
 {
     public function __construct(private string $registro,
                                 private string $nome,
-                                private \DateTime $dataAdmissao,
+                                private string $cpf,
+                                private ?\DateTime $dataAdmissao,
                                 private ?\DateTime $dataDemissao,
-                                private \DateTime $dataNascimento,
+                                private ?\DateTime $dataNascimento,
                                 private string $departamento,
                                 private string $cep,
                                 private string $rua,
@@ -181,6 +182,11 @@ class Employee
     public function getNumeroCasa(): string
     {
         return $this->numeroCasa;
+    }
+
+    public function getCpf(): string
+    {
+        return $this->cpf;
     }
 
 
