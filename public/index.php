@@ -24,9 +24,14 @@ if ($pathInfo == '/' && $httpMethod == 'GET') {
 } elseif ($pathInfo == '/aniversariantes') {
     echo "teste";
     exit();
+<<<<<<< HEAD
     #require_once __DIR__ . '/../view/aniversariantes-old.php';
 } elseif ($pathInfo == '/lista-funcionarios') {
     require_once __DIR__ . 'lista-funcionarios.php';
 }  else {
+=======
+    require_once __DIR__ . '/../view/aniversariantes-old.php';
+} else {
+>>>>>>> 117cdf2c77719e0c2620bf1d85b9f760c40f6212
     $controller = new Error404Controller();
 }
