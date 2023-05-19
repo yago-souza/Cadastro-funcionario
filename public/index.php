@@ -18,10 +18,15 @@ if ($pathInfo == '/' && $httpMethod == 'GET') {
     $controllerClass = new NewEmployeeController($employeeRepository);
     $controllerClass->processaRequisicao();
     #header('Location: /');
+    #var_dump($pathInfo);
     #var_dump($httpMethod);
     #var_dump($_POST);
 } elseif ($pathInfo == '/aniversariantes') {
-    require_once __DIR__ . '/../view/Aniversariantes.php';
-} else {
+    echo "teste";
+    exit();
+    #require_once __DIR__ . '/../view/aniversariantes-old.php';
+} elseif ($pathInfo == '/lista-funcionarios') {
+    require_once __DIR__ . 'lista-funcionarios.php';
+}  else {
     $controller = new Error404Controller();
 }

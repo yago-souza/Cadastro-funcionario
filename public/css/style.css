@@ -10,7 +10,6 @@ header {
     align-items: center;
     max-width: 800px;
     margin: 0 auto;
-
 }
 
 .logo {
@@ -27,15 +26,11 @@ form {
     margin: 0 auto;
 }
 
-label {
-    display: flex;
-    flex-direction: column;
+.form-cadastro label{
     margin-bottom: 20px;
     text-align: left;
     font-weight: bold;
-    width: 30%;
-    padding-right: 10%;
-    padding-left: 10%;
+    max-width: 500px;
 }
 
 input[type="text"],
@@ -65,8 +60,6 @@ button:hover {
     background-color: #3e8e41;
 }
 
-
-
 .lista{
     background: #069cc2;
     width: 140px;
@@ -82,12 +75,8 @@ button:hover {
     background-color: #3e8e41;
 }
 
-
-
 h1 {
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
 }
 
 table {
@@ -109,10 +98,4 @@ th {
 
 tr:nth-child(even) {
     background-color: #f9f9f9;
-}
-
-.month {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 10px;
 }
