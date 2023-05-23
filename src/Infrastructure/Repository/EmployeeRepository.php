@@ -32,17 +32,46 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
 
     public function employeesBirthAt(int $birthDate): array
     {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
         #$sqlQuery = 'SELECT * FROM employees WHERE Data_nascimento = ?;';
         $sqlQuery = "SELECT *
                             FROM SPL_VW_EMPLOYEES
                             WHERE EXTRACT (MONTH FROM DATA_NASCIMENTO) = ?
                             AND EMP_NUM NOT IN ('3270','3292','3217','3451','3612')
                             ORDER BY EXTRACT(DAY FROM DATA_NASCIMENTO)";
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+        #$sqlQuery = 'SELECT * FROM employees WHERE Data_nascimento = ?;';
+        $sqlQuery = 'SELECT *
+                            FROM SPL_VW_EMPLOYEES
+                            WHERE EXTRACT (MONTH FROM DATA_NASCIMENTO) = ?
+                            ORDER BY EXTRACT(DAY FROM DATA_NASCIMENTO)';
+>>>>>>> 117cdf2c77719e0c2620bf1d85b9f760c40f6212
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
         $stmt = $this->connection->prepare($sqlQuery);
         $stmt->bindValue(1, $birthDate);
         $stmt->execute();
 
          return $this->hydrateEmployeesList($stmt);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+        $sqlQuery = 'SELECT * FROM employees WHERE Data_nascimento = ?;';
+        $stmt = $this->connection->prepare($sqlQuery);
+        $stmt->bindValue(1, $birthDate->format('Y-m-d'));
+        $stmt->execute();
+
+        return $this->hydrateStudentList($stmt);
+>>>>>>> 407b0560f2eb1addaaf84f7736ecda8787cef404
+>>>>>>> 117cdf2c77719e0c2620bf1d85b9f760c40f6212
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
     }
 
     public function save(Employee $employee): bool
@@ -64,7 +93,14 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
             $dataDemissao = null;
             $dataAdmissao = null;
             $dataNascimento = null;
+<<<<<<< HEAD
             $departamento = "DEPARTAMENTO NÃO LISTADO";
+=======
+<<<<<<< HEAD
+            $departamento = "DEPARTAMENTO NÃO LISTADO";
+=======
+>>>>>>> 117cdf2c77719e0c2620bf1d85b9f760c40f6212
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
             if ($employeeData['DATA_DEMISSAO'] !== null) {
                 $dataDemissao = \DateTime::createFromFormat('d/m/Y', $employeeData['DATA_DEMISSAO']);
             }
@@ -73,6 +109,10 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
             }
             if ($employeeData['DATA_NASCIMENTO'] !== null) {
                 $dataNascimento = \DateTime::createFromFormat('d/m/Y', $employeeData['DATA_NASCIMENTO']);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
             }
             if ($employeeData['DEPARTAMENTO'] !== null) {
                 $departamento = mb_convert_case($employeeData['DEPARTAMENTO'], MB_CASE_TITLE, 'UTF-8');
@@ -85,6 +125,19 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
                 $dataDemissao,
                 $dataNascimento,
                 $departamento,
+<<<<<<< HEAD
+=======
+=======
+            }
+            $employeeList[] = new Employee(
+                $employeeData['EMP_NUM'],
+                mb_convert_case($employeeData['NAME'], MB_CASE_TITLE, 'UTF-8'),
+                $dataAdmissao,
+                $dataDemissao,
+                $dataNascimento,
+                mb_convert_case($employeeData['DEPARTAMENTO'], MB_CASE_TITLE, 'UTF-8'),
+>>>>>>> 117cdf2c77719e0c2620bf1d85b9f760c40f6212
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
                 $employeeData['CEP'],
                 mb_convert_case($employeeData['RUA'], MB_CASE_TITLE, 'UTF-8'),
                 $employeeData['NUMERO_CASA'],
@@ -159,7 +212,15 @@ class EmployeeRepository implements \Spaal\RH\Domain\Repository\EmployeeReposito
                                                Bairro = :Bairro,
                                                Cidade = :Cidade,
                                                CPF = :Cpf
+<<<<<<< HEAD
                                                WHERE EMP_NUM = :Registro';;
+=======
+<<<<<<< HEAD
+                                               WHERE EMP_NUM = :Registro';;
+=======
+                                               WHERE Registro = :Registro';;
+>>>>>>> 117cdf2c77719e0c2620bf1d85b9f760c40f6212
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
         $statement = $this->connection->prepare($updateQuery);
         $success = $statement->execute([
             ':Registro' => $employee->getRegistro(),

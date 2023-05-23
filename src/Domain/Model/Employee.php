@@ -6,7 +6,15 @@ class Employee
 {
     public function __construct(private string $registro,
                                 private string $nome,
+<<<<<<< HEAD
                                 private ?string $cpf,
+=======
+<<<<<<< HEAD
+                                private ?string $cpf,
+=======
+                                private string $cpf,
+>>>>>>> 117cdf2c77719e0c2620bf1d85b9f760c40f6212
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
                                 private ?\DateTime $dataAdmissao,
                                 private ?\DateTime $dataDemissao,
                                 private ?\DateTime $dataNascimento,

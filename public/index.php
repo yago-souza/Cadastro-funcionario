@@ -17,6 +17,7 @@ if ($pathInfo == '/' && $httpMethod == 'GET') {
     require_once __DIR__ . '/../src/Controller/NewEmployeeController.php';
     $controllerClass = new NewEmployeeController($employeeRepository);
     $controllerClass->processaRequisicao();
+<<<<<<< HEAD
 } elseif ($pathInfo == '/aniversariantes') {
     echo "teste";
     exit(b);
@@ -29,5 +30,23 @@ if ($pathInfo == '/' && $httpMethod == 'GET') {
 
     require_once __DIR__ . 'login-form.php';
 }  else {
+=======
+    #header('Location: /');
+    #var_dump($pathInfo);
+    #var_dump($httpMethod);
+    #var_dump($_POST);
+} elseif ($pathInfo == '/aniversariantes') {
+    echo "teste";
+    exit();
+<<<<<<< HEAD
+    #require_once __DIR__ . '/../view/aniversariantes-old.php';
+} elseif ($pathInfo == '/lista-funcionarios') {
+    require_once __DIR__ . 'lista-funcionarios.php';
+}  else {
+=======
+    require_once __DIR__ . '/../view/aniversariantes-old.php';
+} else {
+>>>>>>> 117cdf2c77719e0c2620bf1d85b9f760c40f6212
+>>>>>>> 57e33f36ba4be2fcc3e4949fd464bfc791b199e5
     $controller = new Error404Controller();
 }
